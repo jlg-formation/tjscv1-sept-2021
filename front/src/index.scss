@@ -4,6 +4,12 @@ body {
   font-family: sans-serif;
 }
 
+div#root {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
 header {
   height: 3em;
   display: flex;
@@ -28,6 +34,10 @@ header {
       text-decoration: underline;
     }
   }
+}
+
+main {
+  flex-grow: 1;
 }
 
 footer {
