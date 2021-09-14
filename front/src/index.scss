@@ -104,3 +104,22 @@ table {
     }
   }
 }
+
+form {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  max-width: 25em;
+  label {
+    input {
+      border: 0.1em solid #bbb;
+      padding: 0.5em 1em;
+      width: 100%;
+    }
+    padding-bottom: 0.5em;
+  }
+
+  button {
+    margin-top: 2em;
+  }
+}
