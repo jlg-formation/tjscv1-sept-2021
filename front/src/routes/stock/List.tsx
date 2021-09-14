@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
+
 function List() {
   return (
     <main>
       <h1>Liste des articles</h1>
       <div className="content">
         <nav>
-          <button>Ajouter</button>
+          <Link to="/stock/add">
+            <button>Ajouter</button>
+          </Link>
           <button>Supprimer</button>
         </nav>
         <table>
