@@ -1,11 +1,18 @@
+import { Route, Switch } from "react-router-dom";
+import Home from "../routes/Home";
+import Legal from "../routes/Legal";
 import "./Body.css";
 
 function Body() {
   return (
-    <main>
-      <h1>Gérer efficacement votre stock !</h1>
-      <button>Voir le stock</button>
-    </main>
+    <Switch>
+      <Route path="/legal">
+        <Legal />
+      </Route>
+      <Route path="/">
+        <Home />
+      </Route>
+    </Switch>
   );
 }
 

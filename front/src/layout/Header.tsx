@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
   return (
     <header>
-      <a href="/">
+      <Link to="/">
         <img src="./assets/logo.svg" alt="Gestion Stock" />
         <span>Gestion Stock</span>
-      </a>
+      </Link>
     </header>
   );
 }
