@@ -1,0 +1,18 @@
+main.List {
+  nav {
+    button {
+      margin-right: 0.3em;
+    }
+    margin-bottom: 0.5em;
+  }
+
+  table {
+    tbody {
+      .qty,
+      .price {
+        text-align: right;
+        white-space: nowrap;
+      }
+    }
+  }
+}

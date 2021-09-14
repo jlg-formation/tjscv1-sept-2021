@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import "./List.scss";
 
 function List() {
   return (
-    <main>
+    <main className="List">
       <h1>Liste des articles</h1>
       <div className="content">
         <nav>

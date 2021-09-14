@@ -1,5 +1,11 @@
 @import "../node_modules/normalize.css/normalize.css";
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 body {
   font-family: sans-serif;
 }
@@ -73,4 +79,28 @@ button {
 
 h1 {
   text-align: center;
+}
+
+table {
+  border: 0.1em solid #bbb;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: 0.5em 1em;
+  }
+
+  thead {
+    background-color: #bbb;
+  }
+
+  tbody {
+    cursor: pointer;
+    tr:nth-child(even) {
+      background-color: #eee;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+  }
 }
