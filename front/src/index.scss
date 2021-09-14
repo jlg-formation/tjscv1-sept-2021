@@ -5,7 +5,27 @@ body {
 }
 
 header {
+  height: 3em;
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  padding: 0 0.5em;
   img {
     height: 2.5em;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    span {
+      padding: 0 0.5em;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    text-decoration: inherit;
+    color: inherit;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
