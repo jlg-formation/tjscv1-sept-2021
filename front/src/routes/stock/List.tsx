@@ -3,9 +3,9 @@ import { Article } from "../../interfaces/Article";
 import "./List.scss";
 
 const articles: Article[] = [
-  { name: "Tournevis", price: 2.34, qty: 110 },
-  { name: "Tournevis cruciforme", price: 4.25, qty: 30 },
-  { name: "Pelle", price: 7.1, qty: 50 },
+  { id: "a1", name: "Tournevis", price: 2.34, qty: 110 },
+  { id: "a2", name: "Tournevis cruciforme", price: 4.25, qty: 30 },
+  { id: "a3", name: "Pelle", price: 7.1, qty: 50 },
 ];
 
 function List() {
@@ -29,7 +29,7 @@ function List() {
           </thead>
           <tbody>
             {articles.map((a) => (
-              <tr>
+              <tr key={a.id}>
                 <td className="name">{a.name}</td>
                 <td className="price">{a.price} €</td>
                 <td className="qty">{a.qty}</td>
