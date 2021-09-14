@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
+import { Article } from "../../interfaces/Article";
 import "./List.scss";
+
+const articles: Article[] = [
+  { name: "Tournevis", price: 2.34, qty: 110 },
+  { name: "Tournevis cruciforme", price: 4.25, qty: 30 },
+  { name: "Pelle", price: 7.1, qty: 50 },
+];
 
 function List() {
   return (
@@ -21,26 +28,13 @@ function List() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="name">Tournevis</td>
-              <td className="price">2.45 €</td>
-              <td className="qty">110</td>
-            </tr>
-            <tr>
-              <td className="name">Tournevis cruciforme</td>
-              <td className="price">3.10 €</td>
-              <td className="qty">45</td>
-            </tr>
-            <tr>
-              <td className="name">Pelle</td>
-              <td className="price">7.10 €</td>
-              <td className="qty">20</td>
-            </tr>
-            <tr>
-              <td className="name">Pince</td>
-              <td className="price">12.00 €</td>
-              <td className="qty">30</td>
-            </tr>
+            {articles.map((a) => (
+              <tr>
+                <td className="name">{a.name}</td>
+                <td className="price">{a.price} €</td>
+                <td className="qty">{a.qty}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
