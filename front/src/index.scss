@@ -38,6 +38,10 @@ header {
 
 main {
   flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 }
 
 footer {
@@ -53,5 +57,12 @@ footer {
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+button {
+  padding: 0.5em 1em;
+  &:not(:disabled) {
+    cursor: pointer;
   }
 }
