@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { NewArticle } from "../../interfaces/Article";
 
 function Add() {
@@ -7,6 +8,8 @@ function Add() {
     price: 2.34,
     qty: 123,
   } as NewArticle);
+
+  const history = useHistory();
 
   function onChange(fieldName: string) {
     return function (event: React.ChangeEvent<HTMLInputElement>) {
@@ -27,10 +30,17 @@ function Add() {
     };
   }
 
+  function onSubmit(event: React.SyntheticEvent) {
+    console.log("onSubmit: ", arguments);
+    event.preventDefault();
+    // articleHandler.add(newArticle);
+    history.push("/stock");
+  }
+
   return (
     <main>
       <h1>Ajout d'un article</h1>
-      <form action="">
+      <form onSubmit={onSubmit}>
         <label>
           <div>Nom</div>
           <input
