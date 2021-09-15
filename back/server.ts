@@ -30,6 +30,12 @@ app.get("/api/date", (req, res) => {
   });
 });
 
+app.use("/api", (req, res, next) => {
+  setTimeout(() => {
+    next();
+  }, 2000);
+});
+
 app.get("/api/articles", (req, res) => {
   res.json(articles);
 });
