@@ -1,14 +1,12 @@
+import { Subject } from "rxjs";
 import { Article, NewArticle } from "../interfaces/Article";
 
-const initialArticles: Article[] = [
-  { id: "a1", name: "Tournevis", price: 2.34, qty: 110 },
-  { id: "a2", name: "Tournevis cruciforme", price: 4.25, qty: 30 },
-  { id: "a3", name: "Pelle", price: 7.1, qty: 50 },
-];
+const initialArticles: Article[] = [];
 
 class ArticleHandler {
   articles = this.getArticles();
   setArticles = (articles: Article[]) => {};
+  articles$ = new Subject<Article[]>();
 
   constructor() {
     this.refresh();
@@ -27,6 +25,7 @@ class ArticleHandler {
       this.save();
       // on envoie un evenement ecoute par le composant app.
       this.setArticles(this.articles);
+      this.articles$.next(this.articles);
     } catch (err) {
       console.error("err: ", err);
     }

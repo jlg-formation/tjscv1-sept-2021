@@ -10,6 +10,14 @@ import { ArticleContext } from "../../App";
 function List() {
   const { articles, setArticles } = useContext(ArticleContext);
   const [selectedArticles, setSelectedArticles] = useState(new Set<Article>());
+  const [loading, setLoading] = useState(true);
+
+  articleHandler.articles$.subscribe({
+    next: (articles) => {
+      console.log("articles: ", articles);
+      setLoading(false);
+    },
+  });
 
   function toggle(a: Article) {
     return (event: MouseEvent<HTMLElement>) => {
@@ -55,17 +63,25 @@ function List() {
             </tr>
           </thead>
           <tbody>
-            {articles.map((a) => (
-              <tr
-                key={a.id}
-                onClick={toggle(a)}
-                className={selectedArticles.has(a) ? "selected" : ""}
-              >
-                <td className="name">{a.name}</td>
-                <td className="price">{a.price} €</td>
-                <td className="qty">{a.qty}</td>
+            {loading ? (
+              <tr>
+                <td className="name">loading...</td>
+                <td className="price">...</td>
+                <td className="qty">...</td>
               </tr>
-            ))}
+            ) : (
+              articles.map((a) => (
+                <tr
+                  key={a.id}
+                  onClick={toggle(a)}
+                  className={selectedArticles.has(a) ? "selected" : ""}
+                >
+                  <td className="name">{a.name}</td>
+                  <td className="price">{a.price} €</td>
+                  <td className="qty">{a.qty}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
