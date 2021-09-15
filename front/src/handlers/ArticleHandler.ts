@@ -17,10 +17,14 @@ class ArticleHandler {
     this.refresh();
   }
 
-  refresh() {
-    fetch("http://localhost:3333/api/articles")
-      .then((response) => response.json())
-      .then((articles) => console.log(articles));
+  async refresh() {
+    try {
+      const response = await fetch("http://localhost:3333/api/articles");
+      const articles = await response.json();
+      console.log("articles: ", articles);
+    } catch (err) {
+      console.error("err: ", err);
+    }
   }
 
   add(newArticle: NewArticle) {
