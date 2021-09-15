@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { articleHandler } from "../../handlers/ArticleHandler";
+import { Article } from "../../interfaces/Article";
 import "./List.scss";
 
 function List() {
   const [articles] = useState(articleHandler.articles);
+
+  function toggle(a: Article) {
+    return (event: MouseEvent<HTMLElement>) => {
+      console.log("toggle: ", a, event);
+    };
+  }
+
   return (
     <main className="List">
       <h1>Liste des articles</h1>
@@ -25,7 +33,7 @@ function List() {
           </thead>
           <tbody>
             {articles.map((a) => (
-              <tr key={a.id}>
+              <tr key={a.id} onClick={toggle(a)}>
                 <td className="name">{a.name}</td>
                 <td className="price">{a.price} €</td>
                 <td className="qty">{a.qty}</td>
