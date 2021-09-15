@@ -1,9 +1,12 @@
+import cors from "cors";
 import express from "express";
 import serveIndex from "serve-index";
 
 const app = express();
 const port: number = 3333;
 const publicDir = "../front/build";
+
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log("req.url", req.url);
