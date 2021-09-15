@@ -1,26 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { useState, MouseEvent, useEffect } from "react";
+import { useState, MouseEvent, useContext } from "react";
 import { Link } from "react-router-dom";
 import { articleHandler } from "../../handlers/ArticleHandler";
 import { Article } from "../../interfaces/Article";
 import "./List.scss";
+import { ArticleContext } from "../../App";
 
 function List() {
-  const [articles, setArticles] = useState(articleHandler.articles);
+  const { articles, setArticles } = useContext(ArticleContext);
   const [selectedArticles, setSelectedArticles] = useState(new Set<Article>());
-
-  useEffect(() => {
-    console.log("use effect");
-    const previousArticles = articleHandler.articles;
-
-    (async (params) => {
-      await articleHandler.refresh();
-      if (articleHandler.articles.length !== previousArticles.length) {
-        setArticles(articleHandler.articles);
-      }
-    })();
-  });
 
   function toggle(a: Article) {
     return (event: MouseEvent<HTMLElement>) => {

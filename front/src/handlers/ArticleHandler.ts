@@ -12,6 +12,11 @@ function generateId() {
 
 class ArticleHandler {
   articles = this.getArticles();
+  setArticles = (articles: Article[]) => {};
+
+  constructor() {
+    this.refresh();
+  }
 
   async refresh() {
     try {
@@ -23,10 +28,16 @@ class ArticleHandler {
       const articles: Article[] = await response.json();
       console.log("articles: ", articles);
       this.articles = articles;
-      // on envoie un evenement ecoute par le composant.
+      this.save();
+      // on envoie un evenement ecoute par le composant app.
+      this.setArticles(this.articles);
     } catch (err) {
       console.error("err: ", err);
     }
+  }
+
+  register(setArticles: any) {
+    this.setArticles = setArticles;
   }
 
   add(newArticle: NewArticle) {
