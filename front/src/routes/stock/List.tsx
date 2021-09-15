@@ -28,7 +28,7 @@ function List() {
           <Link to="/stock/add">
             <button>Ajouter</button>
           </Link>
-          <button>Supprimer</button>
+          {selectedArticles.size > 0 && <button>Supprimer</button>}
         </nav>
         <table>
           <thead>
