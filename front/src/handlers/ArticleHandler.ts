@@ -66,6 +66,9 @@ class ArticleHandler {
   }
 
   remove(selectedArticles: Set<Article>) {
+    this.articles = this.articles.filter((a) => !selectedArticles.has(a));
+    this.save();
+    this.articles$.next(this.articles);
     const ids = [...selectedArticles].map((a) => a.id);
     (async () => {
       try {
