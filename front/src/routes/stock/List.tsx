@@ -20,6 +20,10 @@ function List() {
     };
   }
 
+  function remove() {
+    console.log("remove");
+  }
+
   return (
     <main className="List">
       <h1>Liste des articles</h1>
@@ -28,7 +32,9 @@ function List() {
           <Link to="/stock/add">
             <button>Ajouter</button>
           </Link>
-          {selectedArticles.size > 0 && <button>Supprimer</button>}
+          {selectedArticles.size > 0 && (
+            <button onClick={remove}>Supprimer</button>
+          )}
         </nav>
         <table>
           <thead>
