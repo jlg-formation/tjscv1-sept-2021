@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { articleHandler } from "../../handlers/ArticleHandler";
@@ -33,10 +35,14 @@ function List() {
       <div className="content">
         <nav>
           <Link to="/stock/add">
-            <button>Ajouter</button>
+            <button aria-label="Ajouter">
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
           </Link>
           {selectedArticles.size > 0 && (
-            <button onClick={remove}>Supprimer</button>
+            <button onClick={remove} aria-label="Supprimer">
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
           )}
         </nav>
         <table>
