@@ -6,18 +6,28 @@ const initialArticles: Article[] = [
   { id: "a3", name: "Pelle", price: 7.1, qty: 50 },
 ];
 
-let seq = 3;
-
 function generateId() {
-  seq++;
-  return "a" + seq;
+  return Date.now() + "_" + Math.floor(Math.random() * 1e6);
 }
 
 class ArticleHandler {
-  articles = initialArticles;
+  articles = this.getArticles();
   add(newArticle: NewArticle) {
     const article = { ...newArticle, id: generateId() };
     this.articles.push(article);
+    this.save();
+  }
+
+  getArticles(): Article[] {
+    const str = localStorage.getItem("articles");
+    if (!str) {
+      return initialArticles;
+    }
+    return JSON.parse(str);
+  }
+
+  save() {
+    localStorage.setItem("articles", JSON.stringify(this.articles));
   }
 }
 
