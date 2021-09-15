@@ -20,8 +20,14 @@ class ArticleHandler {
   async refresh() {
     try {
       const response = await fetch("http://localhost:3333/api/articles");
-      const articles = await response.json();
+      if (response.status >= 400) {
+        console.error("repsonse: ", response);
+        throw new Error("oups. error " + response.status);
+      }
+      const articles: Article[] = await response.json();
       console.log("articles: ", articles);
+      this.articles = articles;
+      // on envoie un evenement ecoute par le composant.
     } catch (err) {
       console.error("err: ", err);
     }
