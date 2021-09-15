@@ -6,10 +6,6 @@ const initialArticles: Article[] = [
   { id: "a3", name: "Pelle", price: 7.1, qty: 50 },
 ];
 
-function generateId() {
-  return Date.now() + "_" + Math.floor(Math.random() * 1e6);
-}
-
 class ArticleHandler {
   articles = this.getArticles();
   setArticles = (articles: Article[]) => {};
@@ -41,9 +37,25 @@ class ArticleHandler {
   }
 
   add(newArticle: NewArticle) {
-    const article = { ...newArticle, id: generateId() };
-    this.articles.push(article);
-    this.save();
+    (async () => {
+      try {
+        const response = await fetch("http://localhost:3333/api/articles", {
+          method: "POST",
+          body: JSON.stringify(newArticle),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status >= 400) {
+          console.error("repsonse: ", response);
+          throw new Error("oups. error " + response.status);
+        }
+      } catch (err) {
+        console.error("err: ", err);
+      } finally {
+        await this.refresh();
+      }
+    })();
   }
 
   getArticles(): Article[] {

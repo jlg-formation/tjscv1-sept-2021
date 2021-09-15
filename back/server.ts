@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
 import serveIndex from "serve-index";
-import { Article } from "./../front/src/interfaces/Article";
+import { Article, NewArticle } from "./../front/src/interfaces/Article";
 
 const app = express();
 const port: number = 3333;
@@ -12,7 +12,12 @@ const articles: Article[] = [
   { id: "a2", name: "Tournevis cruciforme", price: 4.25, qty: 30 },
 ];
 
+function generateId() {
+  return Date.now() + "_" + Math.floor(Math.random() * 1e6);
+}
+
 app.use(cors());
+app.use(express.json());
 
 app.use((req, res, next) => {
   console.log("req.url", req.url);
@@ -27,6 +32,16 @@ app.get("/api/date", (req, res) => {
 
 app.get("/api/articles", (req, res) => {
   res.json(articles);
+});
+
+app.post("/api/articles", (req, res) => {
+  const newArticle = req.body as NewArticle;
+  const article = {
+    ...newArticle,
+    id: generateId(),
+  };
+  articles.push(article);
+  res.status(201).json(article);
 });
 
 app.use(express.static(publicDir));
