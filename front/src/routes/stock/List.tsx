@@ -10,8 +10,8 @@ function List() {
   const [articles, setArticles] = useState(articleHandler.articles);
   const [selectedArticles, setSelectedArticles] = useState(new Set<Article>());
 
-  useEffect((...args) => {
-    console.log("use effect", args);
+  useEffect(() => {
+    console.log("use effect");
     const previousArticles = articleHandler.articles;
 
     (async (params) => {
