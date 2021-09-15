@@ -1,14 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Article } from "../../interfaces/Article";
+import { articleHandler } from "../../handlers/ArticleHandler";
 import "./List.scss";
 
-const articles: Article[] = [
-  { id: "a1", name: "Tournevis", price: 2.34, qty: 110 },
-  { id: "a2", name: "Tournevis cruciforme", price: 4.25, qty: 30 },
-  { id: "a3", name: "Pelle", price: 7.1, qty: 50 },
-];
-
 function List() {
+  const [articles] = useState(articleHandler.articles);
   return (
     <main className="List">
       <h1>Liste des articles</h1>

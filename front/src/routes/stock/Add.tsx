@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { articleHandler } from "../../handlers/ArticleHandler";
 import { NewArticle } from "../../interfaces/Article";
 
 function Add() {
@@ -33,7 +34,7 @@ function Add() {
   function onSubmit(event: React.SyntheticEvent) {
     console.log("onSubmit: ", arguments);
     event.preventDefault();
-    // articleHandler.add(newArticle);
+    articleHandler.add(newArticle);
     history.push("/stock");
   }
 
