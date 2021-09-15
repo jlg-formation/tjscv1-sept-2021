@@ -13,6 +13,16 @@ function generateId() {
 class ArticleHandler {
   articles = this.getArticles();
 
+  constructor() {
+    this.refresh();
+  }
+
+  refresh() {
+    fetch("http://localhost:3333/api/articles")
+      .then((response) => response.json())
+      .then((articles) => console.log(articles));
+  }
+
   add(newArticle: NewArticle) {
     const article = { ...newArticle, id: generateId() };
     this.articles.push(article);
