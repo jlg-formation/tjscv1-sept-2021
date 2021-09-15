@@ -7,6 +7,7 @@ class ArticleHandler {
   articles = this.getArticles();
   setArticles = (articles: Article[]) => {};
   articles$ = new Subject<Article[]>();
+  error$ = new Subject<string>();
 
   constructor() {
     this.refresh();
@@ -28,6 +29,9 @@ class ArticleHandler {
       this.articles$.next(this.articles);
     } catch (err) {
       console.error("err: ", err);
+      if (err instanceof Error) {
+        this.error$.next(err.message);
+      }
     }
   }
 
@@ -85,6 +89,9 @@ class ArticleHandler {
         }
       } catch (err) {
         console.error("err: ", err);
+        if (err instanceof Error) {
+          this.error$.next(err.message);
+        }
       } finally {
         await this.refresh();
       }

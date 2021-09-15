@@ -10,6 +10,7 @@ function List() {
   const [articles, setArticles] = useState([] as Article[]);
   const [selectedArticles, setSelectedArticles] = useState(new Set<Article>());
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     console.log("useEffect start");
@@ -20,9 +21,16 @@ function List() {
         setArticles(articles);
       },
     });
+
+    const errorSub = articleHandler.error$.subscribe({
+      next: (error) => {
+        setError(error);
+      },
+    });
     return () => {
       console.log("useEffect cleanup");
       subscription.unsubscribe();
+      errorSub.unsubscribe();
     };
   });
 
@@ -91,6 +99,7 @@ function List() {
             )}
           </tbody>
         </table>
+        {error !== "" && <div className="error">error...: {error}</div>}
       </div>
     </main>
   );
