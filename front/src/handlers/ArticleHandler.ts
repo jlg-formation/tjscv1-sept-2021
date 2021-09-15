@@ -67,8 +67,26 @@ class ArticleHandler {
   }
 
   remove(selectedArticles: Set<Article>) {
-    this.articles = this.articles.filter((a) => !selectedArticles.has(a));
-    this.save();
+    const ids = [...selectedArticles].map((a) => a.id);
+    (async () => {
+      try {
+        const response = await fetch("http://localhost:3333/api/articles", {
+          method: "DELETE",
+          body: JSON.stringify(ids),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status >= 400) {
+          console.error("repsonse: ", response);
+          throw new Error("oups. error " + response.status);
+        }
+      } catch (err) {
+        console.error("err: ", err);
+      } finally {
+        await this.refresh();
+      }
+    })();
   }
 
   save() {

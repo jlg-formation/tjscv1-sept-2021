@@ -7,7 +7,7 @@ const app = express();
 const port: number = 3333;
 const publicDir = "../front/build";
 
-const articles: Article[] = [
+let articles: Article[] = [
   { id: "a1", name: "Tournevis xxx", price: 12.34, qty: 110 },
   { id: "a2", name: "Tournevis cruciforme", price: 4.25, qty: 30 },
 ];
@@ -42,6 +42,12 @@ app.post("/api/articles", (req, res) => {
   };
   articles.push(article);
   res.status(201).json(article);
+});
+
+app.delete("/api/articles", (req, res) => {
+  const ids: string[] = req.body;
+  articles = articles.filter((a) => !ids.includes(a.id));
+  res.status(204).end();
 });
 
 app.use(express.static(publicDir));
