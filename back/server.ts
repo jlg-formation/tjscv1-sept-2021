@@ -1,11 +1,12 @@
 import cors from "cors";
 import express from "express";
+import { resolve } from "path";
 import serveIndex from "serve-index";
 import { Article, NewArticle } from "./../front/src/interfaces/Article";
 
 const app = express();
 const port: number = 3333;
-const publicDir = "../front/build";
+const publicDir = resolve(__dirname, "../front/build");
 
 let articles: Article[] = [
   { id: "a1", name: "Tournevis xxx", price: 12.34, qty: 110 },
@@ -58,6 +59,10 @@ app.delete("/api/articles", (req, res) => {
 
 app.use(express.static(publicDir));
 app.use(serveIndex(publicDir));
+
+app.use((req, res) => {
+  res.sendFile(resolve(publicDir, "index.html"));
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
