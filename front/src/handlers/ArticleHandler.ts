@@ -13,10 +13,6 @@ function generateId() {
 class ArticleHandler {
   articles = this.getArticles();
 
-  constructor() {
-    this.refresh();
-  }
-
   async refresh() {
     try {
       const response = await fetch("http://localhost:3333/api/articles");
