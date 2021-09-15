@@ -5,7 +5,7 @@ import { Article } from "../../interfaces/Article";
 import "./List.scss";
 
 function List() {
-  const [articles] = useState(articleHandler.articles);
+  const [articles, setArticles] = useState(articleHandler.articles);
   const [selectedArticles, setSelectedArticles] = useState(new Set<Article>());
 
   function toggle(a: Article) {
@@ -22,6 +22,9 @@ function List() {
 
   function remove() {
     console.log("remove");
+    articleHandler.remove(selectedArticles);
+    setSelectedArticles(new Set());
+    setArticles([...articleHandler.articles]);
   }
 
   return (

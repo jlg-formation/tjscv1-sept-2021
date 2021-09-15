@@ -12,6 +12,7 @@ function generateId() {
 
 class ArticleHandler {
   articles = this.getArticles();
+
   add(newArticle: NewArticle) {
     const article = { ...newArticle, id: generateId() };
     this.articles.push(article);
@@ -24,6 +25,11 @@ class ArticleHandler {
       return initialArticles;
     }
     return JSON.parse(str);
+  }
+
+  remove(selectedArticles: Set<Article>) {
+    this.articles = this.articles.filter((a) => !selectedArticles.has(a));
+    this.save();
   }
 
   save() {
